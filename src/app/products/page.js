@@ -1,8 +1,11 @@
 "use client";
 
 import useSWR from "swr";
+import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import ProductGrid from "@/components/ProductGrid";
+import { useState } from "react";
+import BasketSidebar from "@/components/BasketSidebar";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -11,6 +14,15 @@ export default function Products() {
     "https://dummyjson.com/products",
     fetcher
   );
+
+  const [basketItems, setBasketItems] = useState([]);
+
+  function addToBasket(event) {
+    const newItem = {
+      id: event,
+    };
+    setBasketItems([newItem, ...basketItems]);
+  }
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
@@ -22,8 +34,10 @@ export default function Products() {
         <form action="">
           <input type="text" placeholder="Search..." />
         </form>
+        <Link href={`/checkout?items=${basketItems}`}>Go to checkout</Link>
       </PageHeader>
-      <ProductGrid data={data.products} />
+      <ProductGrid data={data.products} addToBasket={addToBasket} />
+      <BasketSidebar />
     </main>
   );
 }
