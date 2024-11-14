@@ -3,7 +3,7 @@
 import useSWR from "swr";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
-import ProductGrid from "@/components/ProductGrid";
+import ProductGrid from "@/components/products/ProductGrid";
 import { useState } from "react";
 import BasketSidebar from "@/components/BasketSidebar";
 
@@ -17,9 +17,13 @@ export default function Products() {
 
   const [basketItems, setBasketItems] = useState([]);
 
-  function addToBasket(event) {
+  function addToBasket(event, thumbnail, brand, title, price) {
     const newItem = {
       id: event,
+      img: thumbnail,
+      brand: brand,
+      title: title,
+      price: price,
     };
     setBasketItems([newItem, ...basketItems]);
   }
@@ -36,7 +40,7 @@ export default function Products() {
         </form>
         <Link
           href={
-            "/checkout?items" +
+            "/checkout?items=" +
             JSON.stringify(
               basketItems.map((item) => {
                 return { id: item.id };
@@ -48,7 +52,7 @@ export default function Products() {
         </Link>
       </PageHeader>
       <ProductGrid data={data.products} addToBasket={addToBasket} />
-      <BasketSidebar />
+      <BasketSidebar basketItems={basketItems} />
     </main>
   );
 }
