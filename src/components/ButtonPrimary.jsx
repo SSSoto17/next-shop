@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
-const CTA = ({ url, label, icon }) => {
+const ButtonPrimary = ({ url, label, icon }) => {
   return (
     <Link
       href={url}
@@ -13,4 +13,4 @@ const CTA = ({ url, label, icon }) => {
   );
 };
 
-export default CTA;
+export default ButtonPrimary;

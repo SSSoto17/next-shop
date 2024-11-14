@@ -1,4 +1,4 @@
-import CTA from "./CTA";
+import ButtonPrimary from "./ButtonPrimary";
 
 const Hero = () => {
   return (
@@ -6,7 +6,7 @@ const Hero = () => {
       <article className="flow-space bg-silver-chalice-50 drop-shadow-main rounded-xl p-6 col-start-2 max-w-lg">
         <h1 className="font-bold text-4xl text-silver-chalice-950">NextShop</h1>
         <p className="text-xl">Ready for your Next big splash?</p>
-        <CTA url="/products" label="Explore our selection" icon />
+        <ButtonPrimary url="/products" label="Explore our selection" icon />
       </article>
     </section>
   );

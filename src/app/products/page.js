@@ -5,7 +5,7 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import ProductGrid from "@/components/products/ProductGrid";
 import { useState } from "react";
-import BasketSidebar from "@/components/BasketSidebar";
+import BasketSidebar from "@/components/checkout/BasketSidebar";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -32,7 +32,7 @@ export default function Products() {
   if (isLoading) return <div>loading...</div>;
 
   return (
-    <main className="auto-rows-min">
+    <main>
       <PageHeader pageTitle="All products">
         <button>Filter</button>
         <form action="">

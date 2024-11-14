@@ -5,7 +5,8 @@ import { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { IoCloseOutline } from "react-icons/io5";
 import { SlArrowUp } from "react-icons/sl";
-import { BasketCard } from "./BasketCard";
+import { ProductCard } from "./ProductCard";
+import ProductBasket from "./ProductBasket";
 
 const BasketSidebar = ({ basketItems }) => {
   const [openPopup, setOpenPopup] = useState(false);
@@ -22,8 +23,14 @@ const BasketSidebar = ({ basketItems }) => {
     <section
       className={`${
         openPopup ? "h-screen" : "h-14"
-      } w-screen fixed bottom-0 bg-main-background transition-all duration-500`}
+      } z-20 w-screen fixed bottom-0 bg-main-background transition-all duration-500`}
     >
+      {/* <ProductBasket basketItems={itemsFromBasket} /> */}
+      {/* <PriceTotal
+        subTotal={subTotalRounded}
+        discount="-10.99"
+        priceTotal="19.97"
+      /> */}
       <div className="max-w-[1200px] mx-auto">
         <div
           className="p-4 flex justify-between border-b-2 border-silver-chalice-900 cursor-pointer"
@@ -45,8 +52,7 @@ const BasketSidebar = ({ basketItems }) => {
           <ul>
             {basketItems?.map((item) => {
               return (
-                <BasketCard
-                  key={item.id}
+                <ProductCard
                   {...item}
                   // amount={item.id === item.id ? num++ : num}
                 />
