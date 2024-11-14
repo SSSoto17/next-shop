@@ -13,21 +13,22 @@ const Header = () => {
   };
 
   return (
-    <header
-      className={`py-4 bg-main-background drop-shadow-main transition-all duration-500`}
-    >
-      <nav className="flex justify-between">
-        <div className="flex gap-6">
-          <Link href="/">Logo</Link>
-          <div className="hidden md:inline-flex md:gap-6">
+    <header className="py-4 bg-main-background drop-shadow-main transition-all duration-500 z-10">
+      <nav className="flex justify-between items-center">
+        <menu className="hidden md:inline-flex md:gap-6">
+          <li>
             <Link href="/">Home</Link>
-            <Link href="/">Products</Link>
-          </div>
-        </div>
-
+          </li>
+          <li>
+            <Link href="/products">Products</Link>
+          </li>
+        </menu>
+        <Link href="/" className="text-xl font-bold uppercase">
+          Logo
+        </Link>
         <menu className="flex gap-4 md:justify-self-end">
           <button>
-            <HiOutlineShoppingCart size="24px" />
+            <HiOutlineShoppingCart className="text-2xl md:text-3xl" />
           </button>
           <button onClick={handleClick} className="z-20 md:hidden">
             <span
@@ -54,15 +55,23 @@ const Header = () => {
         </menu>
       </nav>
 
-      <div
-        className={`w-screen h-screen absolute z-10 top-0 left-[-16px] bg-silver-chalice-100 flex flex-col items-center justify-around transition-all duration-500 ease-in-out ${
+      <nav
+        className={`w-screen h-screen absolute z-10 top-0 left-[-16px] bg-silver-chalice-100 grid items-center justify-around transition-all duration-500 ease-in-out ${
           isOpen ? "left-0" : "left-full"
         }`}
       >
-        <Link href="/">Logo</Link>
-        <Link href="/">Home</Link>
-        <Link href="/">Products</Link>
-      </div>
+        <menu>
+          <li>
+            <Link href="/">Logo</Link>
+          </li>
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <Link href="/products">Products</Link>
+          </li>
+        </menu>
+      </nav>
     </header>
   );
 };
