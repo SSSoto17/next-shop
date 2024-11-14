@@ -16,17 +16,33 @@ export default function Products() {
   );
 
   const [basketItems, setBasketItems] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
-  function addToBasket(event, thumbnail, brand, title, price) {
-    const newItem = {
-      id: event,
-      img: thumbnail,
-      brand: brand,
-      title: title,
-      price: price,
-    };
-    setBasketItems([newItem, ...basketItems]);
+  function addToBasket(id, thumbnail, brand, title, price) {
+    // If the basket icon already exists, add +1 to its amount.
+    const existingItemIndex = basketItems.findIndex((item) => item.id === id);
+    if (existingItemIndex >= 0) {
+      console.log("We found it!");
+      const newList = [...basketItems];
+      newList[existingItemIndex].amount++;
+      setBasketItems(newList);
+    } else {
+      // Else, add a new item to the array
+      const newItem = {
+        id: id,
+        img: thumbnail,
+        brand: brand,
+        title: title,
+        price: price,
+        amount: 1,
+      };
+      setBasketItems([newItem, ...basketItems]);
+    }
   }
+
+  const deleteFromBasket = (id) => {
+    setBasketItems(basketItems.filter((item) => item.id !== id));
+  };
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
@@ -34,10 +50,14 @@ export default function Products() {
   return (
     <main className="auto-rows-min">
       <PageHeader pageTitle="All products">
-        <button>Filter</button>
-        <form action="">
-          <input type="text" placeholder="Search..." />
-        </form>
+        {/* <button>Filter</button> */}
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchInput}
+          onInput={(e) => setSearchInput(e.currentTarget.value)}
+        />
+
         <Link
           href={
             "/checkout?items=" +
@@ -51,8 +71,20 @@ export default function Products() {
           Go to checkout
         </Link>
       </PageHeader>
-      <ProductGrid data={data.products} addToBasket={addToBasket} />
-      <BasketSidebar basketItems={basketItems} />
+      <ProductGrid
+        data={
+          searchInput.length > 0
+            ? data.products.filter((item) =>
+                item.title.toLowerCase().includes(searchInput.toLowerCase())
+              )
+            : data.products
+        }
+        addToBasket={addToBasket}
+      />
+      <BasketSidebar
+        basketItems={basketItems}
+        deleteFromBasket={deleteFromBasket}
+      />
     </main>
   );
 }
