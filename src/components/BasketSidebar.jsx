@@ -44,7 +44,13 @@ const BasketSidebar = ({ basketItems }) => {
         <div className="h-screen relative p-4">
           <ul>
             {basketItems?.map((item) => {
-              return <BasketCard key={item.id} {...item} />;
+              return (
+                <BasketCard
+                  key={item.id}
+                  {...item}
+                  // amount={item.id === item.id ? num++ : num}
+                />
+              );
             })}
           </ul>
 
