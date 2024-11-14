@@ -34,7 +34,18 @@ export default function Products() {
         <form action="">
           <input type="text" placeholder="Search..." />
         </form>
-        <Link href={`/checkout?items=${basketItems}`}>Go to checkout</Link>
+        <Link
+          href={
+            "/checkout?items" +
+            JSON.stringify(
+              basketItems.map((item) => {
+                return { id: item.id };
+              })
+            )
+          }
+        >
+          Go to checkout
+        </Link>
       </PageHeader>
       <ProductGrid data={data.products} addToBasket={addToBasket} />
       <BasketSidebar />
