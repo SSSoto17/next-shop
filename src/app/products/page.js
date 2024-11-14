@@ -40,7 +40,7 @@ export default function Products() {
         </form>
         <Link
           href={
-            "/checkout?items" +
+            "/checkout?items=" +
             JSON.stringify(
               basketItems.map((item) => {
                 return { id: item.id };
