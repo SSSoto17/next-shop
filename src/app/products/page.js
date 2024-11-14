@@ -17,9 +17,13 @@ export default function Products() {
 
   const [basketItems, setBasketItems] = useState([]);
 
-  function addToBasket(event) {
+  function addToBasket(event, thumbnail, brand, title, price) {
     const newItem = {
       id: event,
+      img: thumbnail,
+      brand: brand,
+      title: title,
+      price: price,
     };
     setBasketItems([newItem, ...basketItems]);
   }

@@ -25,7 +25,7 @@ const Header = () => {
           <Link href="/">Logo</Link>
           <div className="hidden md:inline-flex md:gap-6">
             <Link href="/">Home</Link>
-            <Link href="/">Products</Link>
+            <Link href="/products">Products</Link>
           </div>
         </div>
 
@@ -65,7 +65,7 @@ const Header = () => {
       >
         <Link href="/">Logo</Link>
         <Link href="/">Home</Link>
-        <Link href="/">Products</Link>
+        <Link href="/products">Products</Link>
       </div>
     </header>
   );

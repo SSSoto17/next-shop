@@ -15,7 +15,7 @@ const Card = ({ id, title, brand, price, thumbnail, addToBasket }) => {
           <p className="font-bold">{price}</p>
           <button
             className="bg-silver-chalice-200 p-2 rounded-lg"
-            onClick={() => addToBasket(id)}
+            onClick={() => addToBasket(id, thumbnail, brand, title, price)}
           >
             <MdOutlineShoppingBag size="16" />
           </button>

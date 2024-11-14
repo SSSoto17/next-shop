@@ -16,6 +16,8 @@ const BasketSidebar = ({ basketItems }) => {
 
   console.log("basketItems: ", basketItems);
 
+  const num = 1;
+
   return (
     <section
       className={`${
@@ -39,18 +41,19 @@ const BasketSidebar = ({ basketItems }) => {
           )}
         </div>
 
-        <div className="p-4">
+        <div className="h-screen relative p-4">
           <ul>
             {basketItems?.map((item) => {
               return <BasketCard key={item.id} {...item} />;
             })}
           </ul>
-          <footer>
-            <p>Subtotal: (price)</p>
+
+          <div className="w-full absolute bottom-14 p-8 bg-main-background overflow-x-clip">
+            <p>Subtotal: {basketItems?.price}</p>
             <p>Total savings: (discount)</p>
             <p>Total: (price - discount)</p>
             <button>Pay now</button>
-          </footer>
+          </div>
         </div>
       </div>
     </section>
