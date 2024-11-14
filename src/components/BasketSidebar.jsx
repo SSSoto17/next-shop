@@ -1,15 +1,20 @@
+"use client";
+
 import { useState } from "react";
 
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { IoCloseOutline } from "react-icons/io5";
 import { SlArrowUp } from "react-icons/sl";
+import { BasketCard } from "./BasketCard";
 
-const BasketSidebar = () => {
+const BasketSidebar = ({ basketItems }) => {
   const [openPopup, setOpenPopup] = useState(false);
 
   const handlePopup = () => {
     setOpenPopup(!openPopup);
   };
+
+  console.log("basketItems: ", basketItems);
 
   return (
     <section
@@ -36,9 +41,9 @@ const BasketSidebar = () => {
 
         <div className="p-4">
           <ul>
-            <li>Product</li>
-            <li>Product</li>
-            <li>Product</li>
+            {basketItems?.map((item) => {
+              return <BasketCard key={item.id} {...item} />;
+            })}
           </ul>
           <footer>
             <p>Subtotal: (price)</p>

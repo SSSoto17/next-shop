@@ -48,7 +48,7 @@ export default function Products() {
         </Link>
       </PageHeader>
       <ProductGrid data={data.products} addToBasket={addToBasket} />
-      <BasketSidebar />
+      <BasketSidebar basketItems={basketItems} />
     </main>
   );
 }
