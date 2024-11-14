@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { BurgerMenu } from "./BurgerMenu";
+import { HiOutlineShoppingBag } from "react-icons/hi2";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  const [basketOpen, setBasketOpen] = useState(false);
+  const toggleBasket = () => {
+    setBasketOpen(!basketOpen);
   };
 
   return (
@@ -26,8 +30,8 @@ const Header = () => {
         </div>
 
         <menu className="flex gap-4 md:justify-self-end">
-          <button>
-            <HiOutlineShoppingCart size="24px" />
+          <button className="hidden md:inline-block">
+            <HiOutlineShoppingBag size="32px" />
           </button>
           <button onClick={handleClick} className="z-20 md:hidden">
             <span
