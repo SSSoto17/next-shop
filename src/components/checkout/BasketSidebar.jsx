@@ -8,22 +8,32 @@ import { SlArrowUp } from "react-icons/sl";
 import { ProductCard } from "./ProductCard";
 import ProductBasket from "./ProductBasket";
 
-const BasketSidebar = ({ basketItems }) => {
-  const [openPopup, setOpenPopup] = useState(false);
+const BasketSidebar = ({ basketItems, deleteFromBasket }) => {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [didTimeoutPass, setTimeoutPass] = useState(false);
 
   const handlePopup = () => {
-    setOpenPopup(!openPopup);
+    if (isPopupOpen) {
+      setTimeoutPass(false);
+    } else {
+      setTimeout(() => setTimeoutPass(true), 500);
+    }
+    setIsPopupOpen(!isPopupOpen);
   };
 
   console.log("basketItems: ", basketItems);
 
-  const num = 1;
+  // Adds the sums of all the items in the basket, to a total sum
+  const totalAmountSum = basketItems.reduce(
+    (accumilator, item) => accumilator + item.price * item.amount,
+    0
+  );
 
   return (
     <section
       className={`${
-        openPopup ? "h-screen" : "h-14"
-      } z-20 w-screen fixed bottom-0 bg-main-background transition-all duration-500`}
+        isPopupOpen ? "h-screen" : "h-14"
+      } w-screen fixed z-20 bottom-0 bg-main-background transition-all duration-500`}
     >
       {/* <ProductBasket basketItems={itemsFromBasket} /> */}
       {/* <PriceTotal
@@ -41,7 +51,7 @@ const BasketSidebar = ({ basketItems }) => {
             <div className="w-0.5 h-3/4 bg-silver-chalice-900 rounded-full"></div>
             <h3>My Basket</h3>
           </div>
-          {!openPopup ? (
+          {!isPopupOpen ? (
             <SlArrowUp size="16px" className="mr-1.5" />
           ) : (
             <IoCloseOutline size="24px" />
@@ -49,23 +59,31 @@ const BasketSidebar = ({ basketItems }) => {
         </div>
 
         <div className="h-screen relative p-4">
-          <ul>
+          <ul className="max-h-full pb-32 overflow-y-scroll">
             {basketItems?.map((item) => {
               return (
-                <ProductCard
+                <BasketCard
+                  key={item.id}
+                  onDelete={() => deleteFromBasket(item.id)}
                   {...item}
-                  // amount={item.id === item.id ? num++ : num}
                 />
               );
             })}
           </ul>
+        </div>
+      </div>
 
-          <div className="w-full absolute bottom-14 p-8 bg-main-background overflow-x-clip">
-            <p>Subtotal: {basketItems?.price}</p>
-            <p>Total savings: (discount)</p>
-            <p>Total: (price - discount)</p>
-            <button>Pay now</button>
+      <div
+        className={`${
+          didTimeoutPass ? "inline-block" : "hidden"
+        } w-full absolute bottom-0 left-0 p-8 bg-main-background drop-shadow-main overflow-x-clip`}
+      >
+        <div className="max-w-[1200px] mx-auto">
+          <div className="flex justify-between">
+            <p>Total:</p>
+            <p className="font-bold">{totalAmountSum.toFixed(2)} kr.</p>
           </div>
+          <button>Pay now</button>
         </div>
       </div>
     </section>
