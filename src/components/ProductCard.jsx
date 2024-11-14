@@ -2,11 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { MdOutlineShoppingBag } from "react-icons/md";
 
-const Card = ({ title, brand, price, thumbnail }) => {
+const Card = ({ id, title, brand, price, thumbnail }) => {
   return (
-    <Link href="/">
+    <Link href={`/product/${id}`}>
       <article className="rounded-xl drop-shadow-main bg-silver-chalice-50">
-        {/* <Image src={thumbnail} alt={title} width="200" height="500" /> */}
+        <Image src={thumbnail} alt={title} width="500" height="500" />
         <header className="py-2 px-3">
           <h3 className="text-xs text-silver-chalice-600">{brand}</h3>
           <h4 className="md:text-lg font-normal">{title}</h4>
