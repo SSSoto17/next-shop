@@ -3,7 +3,7 @@
 import useSWR from "swr";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
-import ProductGrid from "@/components/ProductGrid";
+import ProductGrid from "@/components/products/ProductGrid";
 import { useState } from "react";
 import BasketSidebar from "@/components/BasketSidebar";
 

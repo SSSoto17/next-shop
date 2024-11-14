@@ -1,7 +1,7 @@
 import "./globals.css";
 
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "../components/global/Header";
+import Footer from "../components/global/Footer";
 
 export const metadata = {
   title: "NextShop",
@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-main-background text-silver-chalice-900 overflow-x-clip">
+      <body className="bg-main-background text-silver-chalice-900">
         <Header />
         {children}
         <Footer />
