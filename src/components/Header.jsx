@@ -2,14 +2,18 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { HiOutlineShoppingCart } from "react-icons/hi2";
-import { BurgerMenu } from "./BurgerMenu";
+import { HiOutlineShoppingBag } from "react-icons/hi2";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
     setIsOpen(!isOpen);
+  };
+
+  const [basketOpen, setBasketOpen] = useState(false);
+  const toggleBasket = () => {
+    setBasketOpen(!basketOpen);
   };
 
   return (
