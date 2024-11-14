@@ -3,15 +3,12 @@
 import Link from "next/link";
 import { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import MobileNavIcon from "./MobileNavIcon";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
   const [basketOpen, setBasketOpen] = useState(false);
+
   const toggleBasket = () => {
     setBasketOpen(!basketOpen);
   };
@@ -32,30 +29,9 @@ const Header = () => {
         </Link>
         <menu className="flex gap-4 md:justify-self-end">
           <button>
-            <HiOutlineShoppingCart className="text-2xl md:text-3xl" />
+            <HiOutlineShoppingBag className="text-2xl md:text-3xl" />
           </button>
-          <button onClick={handleClick} className="z-20 md:hidden">
-            <span
-              className={`bg-silver-chalice-900 block transition-all duration-300 ease-out 
-                h-0.5 w-6 rounded-sm ${
-                  isOpen ? "rotate-45 translate-y-1.5" : "-translate-y-0.5"
-                }`}
-            ></span>
-
-            <span
-              className={`bg-silver-chalice-900 block transition-all duration-300 ease-out 
-                h-0.5 w-6 rounded-sm my-1 ${
-                  isOpen ? "opacity-0" : "opacity-100"
-                }`}
-            ></span>
-
-            <span
-              className={`bg-silver-chalice-900 block transition-all duration-300 ease-out 
-                h-0.5 w-6 rounded-sm ${
-                  isOpen ? "-rotate-45 -translate-y-1.5" : "translate-y-0.5"
-                }`}
-            ></span>
-          </button>
+          <MobileNavIcon setIsOpen={setIsOpen} isOpen={isOpen} />
         </menu>
       </nav>
 
