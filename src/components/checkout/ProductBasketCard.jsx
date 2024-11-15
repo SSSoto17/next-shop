@@ -3,7 +3,7 @@ import Image from "next/image";
 import { IoCloseOutline } from "react-icons/io5";
 
 export const ProductBasketCard = ({
-  img,
+  thumbnail,
   brand,
   title,
   price,
@@ -15,7 +15,7 @@ export const ProductBasketCard = ({
       <header className="flex gap-4">
         <Image
           className="rounded-lg"
-          src={img}
+          src={thumbnail}
           alt={title}
           width={120}
           height={120}
