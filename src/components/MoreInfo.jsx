@@ -9,16 +9,26 @@ const MoreInfo = ({ product }) => {
 
   return (
     <ul>
-      <Accordion isOpen={isOpen} setIsOpen={setIsOpen} item={1} question="Reviews">
-        {product.reviews.map((review) => {
+      <Accordion
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        item={1}
+        question="Reviews"
+      >
+        {product.reviews.map((review, i) => {
           return (
-            <li>
+            <li key={i}>
               <ReviewCard data={review}></ReviewCard>
             </li>
           );
         })}
       </Accordion>
-      <Accordion isOpen={isOpen} setIsOpen={setIsOpen} item={2} question="Return policy">
+      <Accordion
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        item={2}
+        question="Return policy"
+      >
         <p>{product.returnPolicy}</p>
       </Accordion>
     </ul>

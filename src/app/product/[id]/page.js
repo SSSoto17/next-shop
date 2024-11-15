@@ -16,7 +16,7 @@ export default async function ProductSingle({ params }) {
         <Link href="/products/" className="flex items-center">
           <span className="pr-2">
             <MdOutlineArrowBack />
-          </span>{" "}
+          </span>
           Back to products
         </Link>
       </header>
