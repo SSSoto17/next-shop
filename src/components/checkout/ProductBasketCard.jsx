@@ -11,8 +11,8 @@ export const ProductBasketCard = ({
   onDelete,
 }) => {
   return (
-    <li className="h-28 flex gap-4 justify-between">
-      <header className="flex">
+    <li className="h-full mb-4 pb-4 flex justify-between border-b-2">
+      <header className="flex gap-4">
         <Image
           className="rounded-lg"
           src={img}
