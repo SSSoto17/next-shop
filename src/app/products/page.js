@@ -1,7 +1,6 @@
 "use client";
 
 import useSWR from "swr";
-import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import ProductGrid from "@/components/products/ProductGrid";
 import { useState } from "react";
@@ -56,19 +55,6 @@ export default function Products() {
           value={searchInput}
           onInput={(e) => setSearchInput(e.currentTarget.value)}
         />
-
-        <Link
-          href={
-            "/checkout?items=" +
-            JSON.stringify(
-              basketItems.map((item) => {
-                return { id: item.id };
-              })
-            )
-          }
-        >
-          Go to checkout
-        </Link>
       </PageHeader>
       <ProductGrid
         data={
