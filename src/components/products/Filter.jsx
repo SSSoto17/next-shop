@@ -1,17 +1,13 @@
-import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-
 const Filter = () => {
   return (
     <menu className="grid sm:grid-cols-3 gap-4 min-w-72 [&>*]:min-w-48">
-      <li>
+      <li className=" bg-silver-chalice-200 rounded-lg px-4 py-2 w-full">
         <select
+          className="flex justify-between w-full bg-transparent"
           name="Brand"
           placeholder="Brand"
-          className="flex justify-between bg-silver-chalice-200 rounded-lg px-4 py-2 w-full"
         >
-          {/* <option value="">Brand</option> */}
-
-          {/* Category <MdOutlineKeyboardArrowDown /> */}
+          <option value="">Brand</option>
         </select>
       </li>
       <li>

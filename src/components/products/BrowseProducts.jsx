@@ -1,4 +1,4 @@
-import Filter from "./Fillter";
+import Filter from "./Filter";
 import Search from "./Search";
 
 const BrowseProducts = ({ searchProducts }) => {

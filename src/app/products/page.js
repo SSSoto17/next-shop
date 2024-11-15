@@ -56,6 +56,16 @@ export default function Products() {
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
+  // const filterOptions =
+
+  const filterCategory = [
+    ...new Set(
+      data.products.map((product) => {
+        return product.category;
+      })
+    ),
+  ];
+
   return (
     <main>
       <PageHeader pageTitle="All products">
