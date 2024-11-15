@@ -5,8 +5,7 @@ import { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { IoCloseOutline } from "react-icons/io5";
 import { SlArrowUp } from "react-icons/sl";
-import { ProductBasketCard } from "./ProductBasketCard";
-import ProductBasket from "./ProductBasket";
+import { ProductBasketCard } from "@/components/checkout/ProductBasketCard";
 
 const BasketSidebar = ({ basketItems, deleteFromBasket }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);

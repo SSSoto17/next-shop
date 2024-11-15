@@ -2,31 +2,42 @@ import Image from "next/image";
 
 import { IoCloseOutline } from "react-icons/io5";
 
-export const ProductBasketCard = ({ thumbnail, brand, title, price }) => {
+export const ProductBasketCard = ({
+  img,
+  brand,
+  title,
+  price,
+  amount,
+  onDelete,
+}) => {
   return (
-    <li className="max-h-32">
-      <article className="flex gap-4">
+    <li className="h-28 flex gap-4 justify-between">
+      <header className="flex">
         <Image
           className="rounded-lg"
-          src={thumbnail}
+          src={img}
           alt={title}
           width={120}
           height={120}
         />
-        <section className="flex flex-col grow justify-between relative">
-          <header>
+        <div className="flex flex-col justify-between h-full flex-wrap">
+          <div>
             <h3 className="text-xs text-silver-chalice-600">{brand}</h3>
             <h4 className="md:text-lg font-normal">{title}</h4>
-          </header>
-          <p className="font-bold place-self-end cursor-default">{price}</p>
-          <button className="absolute right-0">
-            <IoCloseOutline
-              size="24px"
-              className="translate-x-2 translate-y-[-8px]"
-            />
-          </button>
-        </section>
-      </article>
+          </div>
+          <h4 className="md:text-lg font-normal flex items-center">
+            <IoCloseOutline size="18px" />
+            {amount}
+          </h4>
+        </div>
+      </header>
+
+      <div className="flex flex-col justify-between items-end">
+        <button onClick={onDelete}>
+          <IoCloseOutline size="32px" />
+        </button>
+        <p className="font-bold">{price * amount} kr.</p>
+      </div>
     </li>
   );
 };
