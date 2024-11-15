@@ -9,7 +9,12 @@ const Card = ({ id, title, brand, price, thumbnail, addToBasket }) => {
       <header className="py-2 px-3">
         <h3 className="text-xs text-silver-chalice-600">{brand}</h3>
         <h4 className="md:text-lg font-normal">
-          <Link href={`/product/${id}`}>{title}</Link>
+          <Link
+            href={`/product/${id}`}
+            className="after:absolute after:inset-0"
+          >
+            {title}
+          </Link>
         </h4>
         <div className="flex justify-between items-center mt-2">
           <p className="font-bold">{price}</p>
