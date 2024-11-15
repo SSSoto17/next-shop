@@ -5,6 +5,7 @@ import PageHeader from "@/components/PageHeader";
 import ProductGrid from "@/components/products/ProductGrid";
 import { useState } from "react";
 import BasketSidebar from "@/components/checkout/BasketSidebar";
+import BrowseProducts from "@/components/products/BrowseProducts";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -42,19 +43,35 @@ export default function Products() {
     setBasketItems(basketItems.filter((item) => item.id !== id));
   };
 
+  function searchProducts(event) {
+    event.preventDefault();
+    const formData = new formData(event.target);
+    // console.log("formData: ", formData.get("searchQuery"));
+
+    // const searchQuery = formData.get("query");
+
+    // setSearchInput(searchQuery);
+  }
+
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
   return (
     <main>
       <PageHeader pageTitle="All products">
-        {/* <button>Filter</button> */}
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchInput}
-          onInput={(e) => setSearchInput(e.currentTarget.value)}
-        />
+        <BrowseProducts searchProducts={searchProducts} />
+        {/* <Link
+          href={
+            "/checkout?items=" +
+            JSON.stringify(
+              basketItems.map((item) => {
+                return { id: item.id };
+              })
+            )
+          }
+        >
+          Go to checkout
+        </Link> */}
       </PageHeader>
       <ProductGrid
         data={
