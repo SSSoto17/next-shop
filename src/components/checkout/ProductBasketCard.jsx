@@ -27,7 +27,7 @@ export const ProductBasketCard = ({
           </div>
           <h4 className="md:text-lg font-normal flex items-center">
             <IoCloseOutline size="18px" />
-            {amount}
+            {amount === undefined ? 1 : amount}
           </h4>
         </div>
       </header>
@@ -36,7 +36,9 @@ export const ProductBasketCard = ({
         <button onClick={onDelete}>
           <IoCloseOutline size="32px" />
         </button>
-        <p className="font-bold">{price * amount} kr.</p>
+        <p className="font-bold">
+          {amount === undefined ? price : price * amount} kr.
+        </p>
       </div>
     </li>
   );
