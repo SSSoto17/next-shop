@@ -1,6 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
+
 import MoreInfo from "@/components/MoreInfo";
 import ImageGallery from "@/components/ImageGallery";
+import { MdOutlineArrowBack } from "react-icons/md";
 
 export default async function ProductSingle({ params }) {
   const id = (await params).id;
@@ -8,7 +11,14 @@ export default async function ProductSingle({ params }) {
 
   return (
     <main>
-      <header></header>
+      <header className="pt-4">
+        <Link href="/products/" className="flex items-center">
+          <span className="pr-2">
+            <MdOutlineArrowBack />
+          </span>{" "}
+          Back to products
+        </Link>
+      </header>
       <ImageGallery product={product}></ImageGallery>
       {/* <Image src={product.thumbnail} alt={product.title} width="500" height="500" /> */}
       <article className="flow-space">
@@ -20,7 +30,7 @@ export default async function ProductSingle({ params }) {
         </p>
         <h3 className="text-xl font-bold">Description</h3>
         <p className="pb-8">{product.description}</p>
-        <MoreInfo></MoreInfo>
+        <MoreInfo product={product}></MoreInfo>
       </article>
     </main>
   );
