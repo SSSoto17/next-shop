@@ -22,7 +22,6 @@ export default function Products() {
     // If the basket icon already exists, add +1 to its amount.
     const existingItemIndex = basketItems.findIndex((item) => item.id === id);
     if (existingItemIndex >= 0) {
-      console.log("We found it!");
       const newList = [...basketItems];
       newList[existingItemIndex].amount++;
       setBasketItems(newList);
