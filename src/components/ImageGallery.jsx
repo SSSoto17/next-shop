@@ -1,15 +1,33 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 
 const ImageGallery = ({ product }) => {
-  console.log(product.images);
+  const [seletedIndex, setSelectedIndex] = useState(0);
+
   return (
     <section>
-      <Image src={product.thumbnail} alt={product.title} width="500" height="500" />
+      <Image
+        src={product.images[seletedIndex]}
+        alt={product.title}
+        width="500"
+        height="500"
+      />
       <ul className="flex row">
-        {product.images.map((image) => {
+        {product.images.map((image, i) => {
           return (
-            <li key={product.id}>
-              <Image src={image} alt="product image" width="100" height="100" />
+            <li
+              key={i}
+              onClick={() => setSelectedIndex(i)}
+              className="cursor-pointer"
+            >
+              <Image
+                src={image}
+                alt={"product image"}
+                width="100"
+                height="100"
+              />
             </li>
           );
         })}
