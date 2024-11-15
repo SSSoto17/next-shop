@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { IoCloseOutline } from "react-icons/io5";
 import { SlArrowUp } from "react-icons/sl";
 import { ProductBasketCard } from "@/components/checkout/ProductBasketCard";
+import ButtonCTA from "../ButtonCTA";
 
 const BasketSidebar = ({ basketItems, deleteFromBasket }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -21,6 +23,11 @@ const BasketSidebar = ({ basketItems, deleteFromBasket }) => {
   };
 
   console.log("basketItems: ", basketItems);
+
+  const totalItemsInBasket = basketItems.reduce(
+    (accumilator, item) => accumilator + item.amount,
+    0
+  );
 
   // Adds the sums of all the items in the basket, to a total sum
   const totalAmountSum = basketItems.reduce(
@@ -46,7 +53,16 @@ const BasketSidebar = ({ basketItems, deleteFromBasket }) => {
           onClick={handlePopup}
         >
           <div className="flex items-center gap-2">
-            <HiOutlineShoppingBag size="24px" />
+            <div className="relative mr-4">
+              <HiOutlineShoppingBag size="24px" />
+              <p
+                className={`${
+                  totalItemsInBasket <= 0 ? "hidden" : "inline-block"
+                } px-2 py-0.5 pb-1 absolute -top-2 -right-4 bg-apple-700 text-silver-chalice-50 rounded-md text-xs`}
+              >
+                {totalItemsInBasket}
+              </p>
+            </div>
             <div className="w-0.5 h-3/4 bg-silver-chalice-900 rounded-full"></div>
             <h3>My Basket</h3>
           </div>
@@ -82,7 +98,18 @@ const BasketSidebar = ({ basketItems, deleteFromBasket }) => {
             <p>Total:</p>
             <p className="font-bold">{totalAmountSum.toFixed(2)} kr.</p>
           </div>
-          <button>Pay now</button>
+          <Link
+            href={
+              "/checkout?items=" +
+              JSON.stringify(
+                basketItems.map((item) => {
+                  return { id: item.id };
+                })
+              )
+            }
+          >
+            <ButtonCTA label="Go to checkout" />
+          </Link>
         </div>
       </div>
     </section>
