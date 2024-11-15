@@ -1,11 +1,11 @@
 import Filter from "./Filter";
 import Search from "./Search";
 
-const BrowseProducts = ({ searchProducts }) => {
+const BrowseProducts = ({ searchProducts, filterOptions }) => {
   return (
     <section className="flex flex-wrap justify-between">
       <Search searchProducts={searchProducts} />
-      <Filter />
+      <Filter filterOptions={filterOptions} />
     </section>
   );
 };

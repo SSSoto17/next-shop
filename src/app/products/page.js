@@ -56,20 +56,37 @@ export default function Products() {
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
-  // const filterOptions =
-
-  const filterCategory = [
-    ...new Set(
-      data.products.map((product) => {
-        return product.category;
-      })
-    ),
+  const filterOptions = [
+    {
+      title: "Brand",
+      options: [
+        ...new Set(
+          data.products.map((product) => {
+            return product.brand;
+          })
+        ),
+      ],
+    },
+    {
+      title: "Category",
+      options: [
+        ...new Set(
+          data.products.map((product) => {
+            return product.category;
+          })
+        ),
+      ],
+    },
+    { title: "Rating", options: [1, 2, 3, 4, 5] },
   ];
 
   return (
     <main>
       <PageHeader pageTitle="All products">
-        <BrowseProducts searchProducts={searchProducts} />
+        <BrowseProducts
+          searchProducts={searchProducts}
+          filterOptions={filterOptions}
+        />
         {/* <Link
           href={
             "/checkout?items=" +
