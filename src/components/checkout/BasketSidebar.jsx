@@ -5,7 +5,7 @@ import { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { IoCloseOutline } from "react-icons/io5";
 import { SlArrowUp } from "react-icons/sl";
-import { ProductCard } from "./ProductCard";
+import { ProductBasketCard } from "./ProductBasketCard";
 import ProductBasket from "./ProductBasket";
 
 const BasketSidebar = ({ basketItems, deleteFromBasket }) => {
@@ -62,7 +62,7 @@ const BasketSidebar = ({ basketItems, deleteFromBasket }) => {
           <ul className="max-h-full pb-32 overflow-y-scroll">
             {basketItems?.map((item) => {
               return (
-                <BasketCard
+                <ProductBasketCard
                   key={item.id}
                   onDelete={() => deleteFromBasket(item.id)}
                   {...item}

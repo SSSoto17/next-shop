@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader";
 import CheckoutFlow from "@/components/checkout/CheckoutFlow";
 import PriceTotal from "@/components/checkout/PriceTotal";
 import ProductBasket from "@/components/checkout/ProductBasket";
-import { ProductCard } from "@/components/checkout/ProductCard";
+import { ProductCard } from "@/components/checkout/ProductBasketCard";
 
 export default async function Checkout({ searchParams }) {
   // FETCHING API

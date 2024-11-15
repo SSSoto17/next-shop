@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { IoCloseOutline } from "react-icons/io5";
 
-export const ProductCard = ({ thumbnail, brand, title, price }) => {
+export const ProductBasketCard = ({ thumbnail, brand, title, price }) => {
   return (
     <li className="max-h-32">
       <article className="flex gap-4">
