@@ -19,7 +19,7 @@ const Card = ({ id, title, brand, price, thumbnail, addToBasket }) => {
         <div className="flex justify-between items-center mt-2">
           <p className="font-bold">{price}</p>
           <button
-            className="bg-silver-chalice-200 p-2 rounded-lg"
+            className="bg-silver-chalice-200 p-2 rounded-lg z-50"
             onClick={() => addToBasket(id, thumbnail, brand, title, price)}
           >
             <MdOutlineShoppingBag size="16" />
