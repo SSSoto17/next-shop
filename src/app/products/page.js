@@ -29,7 +29,7 @@ export default function Products() {
       // Else, add a new item to the array
       const newItem = {
         id: id,
-        img: thumbnail,
+        thumbnail: thumbnail,
         brand: brand,
         title: title,
         price: price,
