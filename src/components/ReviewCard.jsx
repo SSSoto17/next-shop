@@ -12,7 +12,7 @@ const ReviewCard = ({ data }) => {
         <h4 className="font-bold">{data.reviewerName}</h4>
         <div className="flex pt-1">
           <FaStar className="text-silver-chalice-300" />
-          <FaStar />
+          <FaStar className="" />
           <FaStar />
           <FaStar />
           <FaStar />
