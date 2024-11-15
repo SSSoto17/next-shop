@@ -47,11 +47,13 @@ export default function Products() {
     event.preventDefault();
     const formData = new formData(event.target);
     // console.log("formData: ", formData.get("searchQuery"));
-
     // const searchQuery = formData.get("query");
-
     // setSearchInput(searchQuery);
   }
+
+  // function saveBasket() {
+  //   localStorage.setItem("basket", JSON.stringify(basketItems));
+  // }
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
@@ -60,18 +62,6 @@ export default function Products() {
     <main>
       <PageHeader pageTitle="All products">
         <BrowseProducts searchProducts={searchProducts} />
-        {/* <Link
-          href={
-            "/checkout?items=" +
-            JSON.stringify(
-              basketItems.map((item) => {
-                return { id: item.id };
-              })
-            )
-          }
-        >
-          Go to checkout
-        </Link> */}
       </PageHeader>
       <ProductGrid
         data={
