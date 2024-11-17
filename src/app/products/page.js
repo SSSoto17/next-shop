@@ -47,11 +47,13 @@ export default function Products() {
     event.preventDefault();
     const formData = new formData(event.target);
     // console.log("formData: ", formData.get("searchQuery"));
-
     // const searchQuery = formData.get("query");
-
     // setSearchInput(searchQuery);
   }
+
+  // function saveBasket() {
+  //   localStorage.setItem("basket", JSON.stringify(basketItems));
+  // }
 
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;

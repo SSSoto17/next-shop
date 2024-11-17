@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import MoreInfo from "@/components/MoreInfo";
-import ImageGallery from "@/components/ImageGallery";
+import ImageGallery from "@/components/products/singleproduct/ImageGallery";
 import { MdOutlineArrowBack } from "react-icons/md";
 
 export default async function ProductSingle({ params }) {
