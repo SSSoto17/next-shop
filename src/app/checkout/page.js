@@ -27,6 +27,11 @@ export default async function Checkout({ searchParams }) {
     });
   }
 
+  // DELETE FROM BASKET
+  function deleteFromBasket(id) {
+    setBasketItems(basketItems.filter((item) => item.id !== id));
+  }
+
   let subTotal = itemsFromBasket.reduce(
     (accumulator, currentValue) => accumulator + currentValue.price,
     0
@@ -40,11 +45,16 @@ export default async function Checkout({ searchParams }) {
         <PageHeader pageTitle={"Checkout"}>
           <CheckoutFlow />
         </PageHeader>
-        <ProductBasket basketItems={itemsFromBasket} />
+        <ProductBasket
+          basketItems={itemsFromBasket}
+          deleteFromBasket={deleteFromBasket}
+        />
         <PriceTotal
           subTotal={subTotalRounded}
           discount="-10.99"
           priceTotal="19.97"
+          href="/"
+          label="Pay now"
         />
       </section>
     </main>

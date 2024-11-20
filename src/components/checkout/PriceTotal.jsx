@@ -1,6 +1,8 @@
+// import Link from "next/link";
 import ButtonCTA from "../ButtonCTA";
 
-const PriceTotal = ({ subTotal, discount, priceTotal }) => {
+const PriceTotal = ({ subTotal, discount, priceTotal, href, label }) => {
+  console.log(discount);
   return (
     <footer className="py-4 grid gap-4 border-silver-chalice-400 border-t cursor-default">
       <ul>
@@ -17,7 +19,9 @@ const PriceTotal = ({ subTotal, discount, priceTotal }) => {
           <p>{priceTotal}</p>
         </li>
       </ul>
-      <ButtonCTA label="Pay now" />
+      {/* <Link href={href} className="place-self-center"> */}
+      <ButtonCTA label={label} href={href} />
+      {/* </Link> */}
     </footer>
   );
 };

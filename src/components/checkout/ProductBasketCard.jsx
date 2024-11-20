@@ -7,11 +7,11 @@ export const ProductBasketCard = ({
   brand,
   title,
   price,
-  amount,
+  quantity,
   onDelete,
 }) => {
   return (
-    <li className="h-full mb-4 pb-4 flex justify-between border-b-2">
+    <li className="h-full mb-4 pb-4 flex justify-between border-b-2 last:border-b-0">
       <header className="flex gap-4">
         <Image
           className="rounded-lg"
@@ -20,14 +20,14 @@ export const ProductBasketCard = ({
           width={120}
           height={120}
         />
-        <div className="flex flex-col justify-between h-full flex-wrap">
+        <div className="flex flex-col justify-between h-full flex-wrap cursor-default">
           <div>
             <h3 className="text-xs text-silver-chalice-600">{brand}</h3>
             <h4 className="md:text-lg font-normal">{title}</h4>
           </div>
-          <h4 className="md:text-lg font-normal flex items-center">
+          <h4 className="md:text-lg font-normal flex items-center cursor-default">
             <IoCloseOutline size="18px" />
-            {amount === undefined ? 1 : amount}
+            {quantity === undefined ? 1 : quantity}
           </h4>
         </div>
       </header>
@@ -36,8 +36,8 @@ export const ProductBasketCard = ({
         <button onClick={onDelete}>
           <IoCloseOutline size="32px" />
         </button>
-        <p className="font-bold">
-          {amount === undefined ? price : price * amount} kr.
+        <p className="font-bold cursor-default">
+          {quantity === undefined ? price : price * quantity} kr.
         </p>
       </div>
     </li>

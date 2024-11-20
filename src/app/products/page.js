@@ -1,11 +1,12 @@
 "use client";
 
 import useSWR from "swr";
-import PageHeader from "@/components/PageHeader";
-import ProductGrid from "@/components/products/ProductGrid";
 import { useState } from "react";
-import BasketSidebar from "@/components/checkout/BasketSidebar";
+
+import PageHeader from "@/components/PageHeader";
 import BrowseProducts from "@/components/products/BrowseProducts";
+import ProductGrid from "@/components/products/ProductGrid";
+import BasketSidebar from "@/components/checkout/BasketSidebar";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
@@ -15,15 +16,21 @@ export default function Products() {
     fetcher
   );
 
+  // USE STATES
   const [basketItems, setBasketItems] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [filter, setFilter] = useState([{ type: "", title: "" }]);
 
-  function addToBasket(id, thumbnail, brand, title, price) {
+  if (error) return <div>failed to load</div>;
+  if (isLoading) return <div>loading...</div>;
+
+  // ADD TO BASKET
+  function addToBasket(id, thumbnail, brand, title, price, discountPercentage) {
     // If the basket icon already exists, add +1 to its amount.
     const existingItemIndex = basketItems.findIndex((item) => item.id === id);
     if (existingItemIndex >= 0) {
       const newList = [...basketItems];
-      newList[existingItemIndex].amount++;
+      newList[existingItemIndex].quantity++;
       setBasketItems(newList);
     } else {
       // Else, add a new item to the array
@@ -33,16 +40,19 @@ export default function Products() {
         brand: brand,
         title: title,
         price: price,
-        amount: 1,
+        quantity: 1,
+        discountPercentage: discountPercentage,
       };
       setBasketItems([newItem, ...basketItems]);
     }
   }
 
-  const deleteFromBasket = (id) => {
+  // DELETE FROM BASKET
+  function deleteFromBasket(id) {
     setBasketItems(basketItems.filter((item) => item.id !== id));
-  };
+  }
 
+  // SEARCH
   function searchProducts(event) {
     event.preventDefault();
     const formData = new formData(event.target);
@@ -55,11 +65,10 @@ export default function Products() {
   //   localStorage.setItem("basket", JSON.stringify(basketItems));
   // }
 
-  if (error) return <div>failed to load</div>;
-  if (isLoading) return <div>loading...</div>;
-
+  // FILTER
   const filterOptions = [
     {
+      id: 1,
       title: "Brand",
       options: [
         ...new Set(
@@ -67,9 +76,12 @@ export default function Products() {
             return product.brand;
           })
         ),
-      ],
+      ].filter((e) => {
+        return e;
+      }),
     },
     {
+      id: 2,
       title: "Category",
       options: [
         ...new Set(
@@ -77,10 +89,18 @@ export default function Products() {
             return product.category;
           })
         ),
-      ],
+      ].filter((e) => {
+        return e;
+      }),
     },
-    { title: "Rating", options: [1, 2, 3, 4, 5] },
+    { id: 3, title: "Rating", options: [1, 2, 3, 4, 5] },
   ];
+
+  function filterProducts(type, title) {
+    return data.products.filter((item) => {
+      item.type === title;
+    });
+  }
 
   return (
     <main>
@@ -88,19 +108,9 @@ export default function Products() {
         <BrowseProducts
           searchProducts={searchProducts}
           filterOptions={filterOptions}
+          filter={filter}
+          setFilter={setFilter}
         />
-        {/* <Link
-          href={
-            "/checkout?items=" +
-            JSON.stringify(
-              basketItems.map((item) => {
-                return { id: item.id };
-              })
-            )
-          }
-        >
-          Go to checkout
-        </Link> */}
       </PageHeader>
       <ProductGrid
         data={

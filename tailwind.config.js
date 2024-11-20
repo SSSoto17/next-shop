@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        main: "minmax(1rem, 1fr) minmax(0, 1200px) minmax(1rem, 1fr)",
+      },
       dropShadow: {
         main: "0 2px 6px rgba(0, 0, 0, 0.15)",
       },
