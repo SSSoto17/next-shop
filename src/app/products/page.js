@@ -39,29 +39,13 @@ export default function Products() {
     }
   }
 
-  const deleteFromBasket = (id) => {
-    setBasketItems(basketItems.filter((item) => item.id !== id));
-  };
-
-  function searchProducts(event) {
-    event.preventDefault();
-    const formData = new formData(event.target);
-    // console.log("formData: ", formData.get("searchQuery"));
-    // const searchQuery = formData.get("query");
-    // setSearchInput(searchQuery);
-  }
-
-  // function saveBasket() {
-  //   localStorage.setItem("basket", JSON.stringify(basketItems));
-  // }
-
   if (error) return <div>failed to load</div>;
   if (isLoading) return <div>loading...</div>;
 
   return (
     <main>
       <PageHeader pageTitle="All products">
-        <BrowseProducts searchProducts={searchProducts} />
+        {/* <BrowseProducts searchProducts={searchProducts} /> */}
       </PageHeader>
       <ProductGrid
         data={
@@ -71,7 +55,6 @@ export default function Products() {
               )
             : data.products
         }
-        addToBasket={addToBasket}
       />
       {/* <BasketSidebar
         basketItems={basketItems}

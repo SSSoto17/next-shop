@@ -1,10 +1,13 @@
 import { ProductBasketCard } from "./ProductBasketCard";
+import { useProductBasket } from "@/store/basketStore";
 
-const ProductBasket = ({ basketItems }) => {
+const ProductBasket = () => {
+  const productBasket = useProductBasket((state) => state.productBasket);
+
   return (
     <ul className="grid gap-4 py-6">
-      {basketItems.length > 0 ? (
-        basketItems.map((product) => {
+      {productBasket.length > 0 ? (
+        productBasket.map((product) => {
           return <ProductBasketCard key={product.id} {...product} />;
         })
       ) : (

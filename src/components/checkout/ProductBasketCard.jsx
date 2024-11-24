@@ -1,15 +1,17 @@
 import Image from "next/image";
+import { useProductBasket } from "@/store/basketStore";
 
 import { IoCloseOutline } from "react-icons/io5";
 
 export const ProductBasketCard = ({
+  id,
   thumbnail,
   brand,
   title,
   price,
-  amount,
-  onDelete,
+  quantity,
 }) => {
+  const removeFromBasket = useProductBasket((state) => state.removeFromBasket);
   return (
     <li className="h-full mb-4 pb-4 flex justify-between border-b-2">
       <header className="flex gap-4">
@@ -27,17 +29,17 @@ export const ProductBasketCard = ({
           </div>
           <h4 className="md:text-lg font-normal flex items-center">
             <IoCloseOutline size="18px" />
-            {amount === undefined ? 1 : amount}
+            {quantity === undefined ? 1 : quantity}
           </h4>
         </div>
       </header>
 
       <div className="flex flex-col justify-between items-end">
-        <button onClick={onDelete}>
+        <button onClick={() => removeFromBasket(id)}>
           <IoCloseOutline size="32px" />
         </button>
         <p className="font-bold">
-          {amount === undefined ? price : price * amount} kr.
+          {quantity === undefined ? price : price * quantity} kr.
         </p>
       </div>
     </li>

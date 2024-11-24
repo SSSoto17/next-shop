@@ -5,15 +5,14 @@ import { useState } from "react";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import MobileNavIcon from "./mobile/MobileNavIcon";
 import MobileNav from "./mobile/MobileNav";
-import ProductBasketSidebar from "../checkout/ProductBasketSidebar";
+
+import { useProductBasket } from "@/store/basketStore";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [basketOpen, setBasketOpen] = useState(false);
-
-  const toggleBasket = () => {
-    setBasketOpen(!basketOpen);
-  };
+  const toggleProductBasket = useProductBasket(
+    (state) => state.toggleProductBasket
+  );
 
   return (
     <header className="py-4 bg-main-background drop-shadow-main z-10 overflow-x-clip">
@@ -33,7 +32,7 @@ const Header = () => {
 
         <ul className="flex gap-4 md:justify-self-end">
           <li>
-            <button>
+            <button onClick={() => toggleProductBasket()}>
               <HiOutlineShoppingBag className="text-2xl md:text-3xl" />
             </button>
           </li>
@@ -44,7 +43,6 @@ const Header = () => {
       </nav>
 
       <MobileNav setIsOpen={setIsOpen} isOpen={isOpen} />
-      <ProductBasketSidebar />
     </header>
   );
 };

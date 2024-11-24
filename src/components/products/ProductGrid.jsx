@@ -7,6 +7,7 @@ const ProductGrid = ({ data, addToBasket }) => {
         return (
           <ProductCard
             key={product.id}
+            product={product}
             {...product}
             addToBasket={addToBasket}
           />
