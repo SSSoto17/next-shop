@@ -73,10 +73,10 @@ export default function Products() {
         }
         addToBasket={addToBasket}
       />
-      <BasketSidebar
+      {/* <BasketSidebar
         basketItems={basketItems}
         deleteFromBasket={deleteFromBasket}
-      />
+      /> */}
     </main>
   );
 }
