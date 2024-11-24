@@ -5,14 +5,51 @@ import { useProductBasket } from "@/store/basketStore";
 import ProductBasket from "./ProductBasket";
 import PriceTotal from "./PriceTotal";
 
+import { IoCloseOutline } from "react-icons/io5";
+import { SlArrowUp } from "react-icons/sl";
+
 export default function ProductBasketSidebar() {
   const displayBasket = useProductBasket((state) => state.displayBasket);
+  const toggleProductBasket = useProductBasket(
+    (state) => state.toggleProductBasket
+  );
+
+  const sidebarStyle = {
+    color: "bg-main-background md:drop-shadow-main",
+    position: " fixed bottom-0 md:right-0 z-20",
+    size: ` w-screen md:max-w-sm ${
+      displayBasket ? "h-screen" : "h-14 md:h-screen"
+    }`,
+    grid: " grid grid-cols-main [&>*]:col-start-2 [&>*]:col-span-1 place-content-start",
+    transition: ` transition-[height] md:transition-[transform] ${
+      !displayBasket && "md:translate-x-full"
+    } duration-500`,
+  };
   return (
     <aside
-      className={`${
-        displayBasket ? "h-screen" : "h-14"
-      } bg-main-background grid grid-cols-main [&>*]:col-start-2 [&>*]:col-span-1 place-content-start w-screen md:max-w-sm fixed z-20 bottom-0 md:right-0 md:drop-shadow-main transition-[height] md:transition-[transform] duration-500`}
+      className={
+        sidebarStyle.color +
+        sidebarStyle.position +
+        sidebarStyle.size +
+        sidebarStyle.grid +
+        sidebarStyle.transition
+      }
     >
+      <header
+        className={`cursor-pointer h-14 py-4 flex gap-6 items-center relative border-silver-chalice-600 transition-[border] duration-500 ${
+          displayBasket && "border-b-2"
+        }`}
+        onClick={() => toggleProductBasket()}
+      >
+        <p>Bag icon</p>
+        {/* <BagIcon quantityTotal={quantityTotal} /> */}
+        <h3 className="border-l-2 border-silver-chalice-800 pl-2">My Basket</h3>
+        {displayBasket ? (
+          <IoCloseOutline size="24px" className="absolute right-0" />
+        ) : (
+          <SlArrowUp size="16px" className="absolute right-0" />
+        )}
+      </header>
       <section>
         <ProductBasket />
         <PriceTotal
