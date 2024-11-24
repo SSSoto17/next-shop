@@ -6,53 +6,51 @@ import { useSearchParams } from "next/navigation";
 
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-import PageHeader from "@/components/PageHeader";
 import Loading from "@/components/global/Loading";
+import PageHeader from "@/components/PageHeader";
 import BrowseProducts from "@/components/products/BrowseProducts";
+// import ViewDetails from "@/components/products/ViewDetails";
 import ProductGrid from "@/components/products/ProductGrid";
-import BasketSidebar from "@/components/checkout/BasketSidebar";
-import ButtonCTA from "@/components/ButtonCTA";
-import Button from "@/components/Button";
 import LoadMore from "@/components/products/LoadMore";
+
+import BasketSidebar from "@/components/checkout/BasketSidebar";
 
 export default function Products() {
   // USE STATES
   const [loadLimit, setLoadLimit] = useState("20");
   const [basketItems, setBasketItems] = useState([]);
-  const [filter, setFilter] = useState([{ type: "", title: "" }]);
+  // const [filter, setFilter] = useState([{ type: "", title: "" }]);
 
   // SEARCH PARAMS
-  const searchParams = useSearchParams();
-  const q = searchParams.get("q");
+  // const searchParams = useSearchParams();
+  // const q = searchParams.get("q");
 
   // DYNAMIC API URL
-  let URL = q
-    ? `https://dummyjson.com/products/search?q=${q}&limit=${loadLimit}`
-    : `https://dummyjson.com/products?limit=${loadLimit}`;
+  // let URL = q
+  //   ? `https://dummyjson.com/products/search?q=${q}&limit=${loadLimit}`
+  //   : `https://dummyjson.com/products?limit=${loadLimit}`;
 
   // FETCH DATA
-  const { data, error, isLoading } = useSWR(URL, fetcher);
+  // const { data, error, isLoading } = useSWR(URL, fetcher);
 
-  if (error)
-    return (
-      <main className="grid-rows-[auto_1fr]">
-        <PageHeader pageTitle="Browse our selection">
-          <BrowseProducts />
-        </PageHeader>
-        <Loading variant="error" />
-      </main>
-    );
-  if (isLoading)
-    return (
-      <main className="grid-rows-[auto_1fr]">
-        <PageHeader pageTitle="Browse our selection">
-          <BrowseProducts />
-        </PageHeader>
-        <Loading variant="loading" />
-      </main>
-    );
-
-  console.log(data.limit);
+  // if (error)
+  //   return (
+  //     <main className="grid-rows-[auto_1fr]">
+  //       <PageHeader pageTitle="Browse our selection">
+  //         <BrowseProducts />
+  //       </PageHeader>
+  //       <Loading variant="error" />
+  //     </main>
+  //   );
+  // if (isLoading)
+  //   return (
+  //     <main className="grid-rows-[auto_1fr]">
+  //       <PageHeader pageTitle="Browse our selection">
+  //         <BrowseProducts />
+  //       </PageHeader>
+  //       <Loading variant="loading" />
+  //     </main>
+  //   );
 
   // ADD TO BASKET
   function addToBasket(id, thumbnail, brand, title, price, discountPercentage) {
@@ -87,67 +85,52 @@ export default function Products() {
   // }
 
   // FILTER
-  const filterOptions = [
-    {
-      id: 1,
-      title: "Brand",
-      options: [
-        ...new Set(
-          data.products.map((product) => {
-            return product.brand;
-          })
-        ),
-      ].filter((e) => {
-        return e;
-      }),
-    },
-    {
-      id: 2,
-      title: "Category",
-      options: [
-        ...new Set(
-          data.products.map((product) => {
-            return product.category;
-          })
-        ),
-      ].filter((e) => {
-        return e;
-      }),
-    },
-    { id: 3, title: "Rating", options: [1, 2, 3, 4, 5] },
-  ];
+  // const filterOptions = [
+  //   {
+  //     id: 1,
+  //     title: "Brand",
+  //     options: [
+  //       ...new Set(
+  //         data.products.map((product) => {
+  //           return product.brand;
+  //         })
+  //       ),
+  //     ].filter((e) => {
+  //       return e;
+  //     }),
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Category",
+  //     options: [
+  //       ...new Set(
+  //         data.products.map((product) => {
+  //           return product.category;
+  //         })
+  //       ),
+  //     ].filter((e) => {
+  //       return e;
+  //     }),
+  //   },
+  //   { id: 3, title: "Rating", options: [1, 2, 3, 4, 5] },
+  // ];
 
-  function filterProducts(type, title) {
-    return data.products.filter((item) => {
-      item.type === title;
-    });
-  }
-
-  console.log(data.total > loadLimit);
+  // function filterProducts(type, title) {
+  //   return data.products.filter((item) => {
+  //     item.type === title;
+  //   });
+  // }
 
   return (
     <main className="grid-rows-[auto_1fr] gap-y-8">
       <PageHeader pageTitle="Browse our selection">
-        <BrowseProducts
-        // filterOptions={filterOptions}
-        // filter={filter}
-        // setFilter={setFilter}
-        />
-        <article className="flex justify-between items-end">
-          <p>{data.total} products</p>
-          {q && (
-            <p>
-              Search: <em>"{q}"</em>
-            </p>
-          )}
-          <p>Viewing {data.limit} products</p>
-        </article>
+        {/* <BrowseProducts /> */}
+        {/* <ViewDetails {...data} searchQuery={q} /> */}
       </PageHeader>
 
-      <ProductGrid data={data.products} addToBasket={addToBasket} />
-      {data.total > loadLimit && (
-        <LoadMore {...data} setLoadLimit={setLoadLimit} />
-      )}
+      {/* <ProductGrid data={data.products} addToBasket={addToBasket} /> */}
+      <ProductGrid loadLimit={loadLimit} addToBasket={addToBasket} />
+      {/* <LoadMore {...data} setLoadLimit={setLoadLimit} /> */}
       {/* <BasketSidebar
         basketItems={basketItems}
         deleteFromBasket={deleteFromBasket}
@@ -155,3 +138,17 @@ export default function Products() {
     </main>
   );
 }
+
+const ViewDetails = ({ total, limit, searchQuery }) => {
+  return (
+    <article className="flex justify-between items-end">
+      <p>{total} products</p>
+      {searchQuery && (
+        <p>
+          Search: <em>"{searchQuery}"</em>
+        </p>
+      )}
+      <p>Viewing {limit} products</p>
+    </article>
+  );
+};

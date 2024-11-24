@@ -1,7 +1,32 @@
+import useSWR from "swr";
+
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
 const Filter = ({ filterOptions, filter, setFilter }) => {
+  const { data } = useSWR("https://dummyjson.com/products/categories", fetcher);
   return (
-    <menu className="grid sm:grid-cols-3 gap-4 min-w-72 [&>*]:min-w-48">
-      {filterOptions.map((filterOption) => {
+    <form
+      action="./products/"
+      className="grid sm:grid-cols-3 gap-4 min-w-72 [&>*]:min-w-48"
+    >
+      <select
+        name="category"
+        // onChange={}
+        className="bg-silver-chalice-200 rounded-lg px-4 py-2 w-full flex justify-between cursor-pointer"
+      >
+        <option className="capitalize appearance-none" value="">
+          Category
+        </option>
+        {data.map((cat) => {
+          return (
+            <option className="capitalize appearance-none" value={cat.slug}>
+              {cat.name}
+            </option>
+          );
+        })}
+      </select>
+
+      {/* {filterOptions.map((filterOption) => {
         return (
           <li
             key={filterOption.id}
@@ -28,8 +53,8 @@ const Filter = ({ filterOptions, filter, setFilter }) => {
             </select>
           </li>
         );
-      })}
-    </menu>
+      })} */}
+    </form>
   );
 };
 

@@ -1,7 +1,7 @@
 import Filter from "./Filter";
 import Search from "./Search";
 
-const BrowseProducts = ({ filterOptions, filter, setFilter }) => {
+const BrowseProducts = () => {
   return (
     <search className="flex flex-wrap justify-between">
       <Search />
