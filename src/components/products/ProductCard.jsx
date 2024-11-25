@@ -10,10 +10,8 @@ const Card = ({
   brand,
   price,
   thumbnail,
-  // addToBasket,
   discountPercentage,
 }) => {
-  console.log("discountPercentage", discountPercentage);
   const addToBasket = useProductBasket((state) => state.addToBasket);
 
   return (
@@ -21,9 +19,11 @@ const Card = ({
       <div
         className={`${
           discountPercentage >= 15 ? "inline-block" : "hidden"
-        } absolute w-fit py-2 px-6 -ml-3 top-3 bg-tabasco-800 rounded-lg`}
+        } absolute w-fit py-2 px-4 -ml-2 top-6 bg-tabasco-800 rounded-lg`}
       >
-        <p className="text-silver-chalice-50">-{discountPercentage} %</p>
+        <p className="text-silver-chalice-50 font-bold">
+          -{discountPercentage.toFixed(0)}%
+        </p>
       </div>
 
       <Image src={thumbnail} alt={title} width="500" height="500" />
@@ -38,19 +38,13 @@ const Card = ({
           </Link>
         </h4>
         <div className="flex justify-between items-center mt-2">
-          <p className="font-bold">{price}$</p>
+          <p className="font-bold">${price}</p>
           <button
             className="bg-silver-chalice-200 p-2 rounded-lg z-50"
             onClick={() => addToBasket(product)}
           >
             <MdOutlineShoppingBag size="16" />
           </button>
-          {/* <button
-            className="bg-silver-chalice-200 p-2 rounded-lg z-50"
-            onClick={() => addToBasket(id, thumbnail, brand, title, price)}
-          >
-            <MdOutlineShoppingBag size="16" />
-          </button> */}
         </div>
       </header>
     </article>
