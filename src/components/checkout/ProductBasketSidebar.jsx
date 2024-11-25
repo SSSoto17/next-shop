@@ -5,8 +5,11 @@ import { useProductBasket } from "@/store/basketStore";
 import ProductBasket from "./ProductBasket";
 import PriceTotal from "./PriceTotal";
 
-import { IoCloseOutline } from "react-icons/io5";
 import { SlArrowUp } from "react-icons/sl";
+import { MdOutlineKeyboardDoubleArrowDown } from "react-icons/md";
+import { SlArrowRight } from "react-icons/sl";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { SlArrowLeft } from "react-icons/sl";
 
 export default function ProductBasketSidebar() {
   const displayBasket = useProductBasket((state) => state.displayBasket);
@@ -16,15 +19,18 @@ export default function ProductBasketSidebar() {
 
   const sidebarStyle = {
     color: "bg-main-background md:drop-shadow-main",
-    position: " fixed bottom-0 md:right-0 z-20",
+    position: " fixed bottom-0 right-0",
     size: ` w-screen md:max-w-sm ${
-      displayBasket ? "h-screen" : "h-14 md:h-screen"
+      displayBasket ? "h-screen z-30" : "h-14 z-10 md:h-screen"
     }`,
     grid: " grid grid-cols-main [&>*]:col-start-2 [&>*]:col-span-1 place-content-start",
-    transition: ` transition-[height] md:transition-[transform] ${
+    transition: ` transition-[height] md:transition-[transform] duration-500 ${
       !displayBasket && "md:translate-x-full"
-    } duration-500`,
+    }`,
   };
+
+  console.log(window.innerWidth);
+
   return (
     <aside
       className={
@@ -36,16 +42,25 @@ export default function ProductBasketSidebar() {
       }
     >
       <header
-        className={`cursor-pointer h-14 py-4 flex gap-6 items-center relative border-silver-chalice-600 transition-[border] duration-500 ${
+        className={`cursor-pointer h-14 py-4 flex gap-6 items-center relative border-silver-chalice-600 transition-[border] duration-100 ${
           displayBasket && "border-b-2"
         }`}
         onClick={() => toggleProductBasket()}
       >
-        <p>Bag icon</p>
-        {/* <BagIcon quantityTotal={quantityTotal} /> */}
+        <BagIcon quantityTotal="1" />
         <h3 className="border-l-2 border-silver-chalice-800 pl-2">My Basket</h3>
-        {displayBasket ? (
-          <IoCloseOutline size="24px" className="absolute right-0" />
+        {displayBasket & (window.innerWidth < 768) ? (
+          <MdOutlineKeyboardDoubleArrowDown
+            size="24px"
+            className="absolute right-0"
+          />
+        ) : displayBasket & (window.innerWidth > 768) ? (
+          <MdKeyboardDoubleArrowRight
+            size="24px"
+            className="absolute right-0"
+          />
+        ) : !displayBasket & (window.innerWidth > 768) ? (
+          <SlArrowLeft size="16px" className="absolute right-0" />
         ) : (
           <SlArrowUp size="16px" className="absolute right-0" />
         )}
@@ -71,6 +86,23 @@ export default function ProductBasketSidebar() {
     </aside>
   );
 }
+
+import { HiOutlineShoppingBag } from "react-icons/hi2";
+
+export const BagIcon = ({ quantityTotal }) => {
+  return (
+    <article className="relative inline-block">
+      <HiOutlineShoppingBag size="24px" />
+      <p
+        className={`${
+          !quantityTotal && "hidden"
+        } px-2 py-0.5 pb-1 absolute -top-2 -right-4 bg-tabasco-500 text-silver-chalice-50 rounded-md text-xs`}
+      >
+        {quantityTotal}
+      </p>
+    </article>
+  );
+};
 
 // import { useState } from "react";
 // import Link from "next/link";

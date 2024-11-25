@@ -6,7 +6,7 @@ import Link from "next/link";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import { IoCloseOutline } from "react-icons/io5";
 import { SlArrowUp } from "react-icons/sl";
-import { ProductBasketCard } from "@/components/checkout/ProductBasketCard";
+// import { ProductBasketCard } from "@/components/checkout/ProductBasketCard";
 import ButtonCTA from "../ButtonCTA";
 
 const BasketSidebar = ({ basketItems, deleteFromBasket }) => {
